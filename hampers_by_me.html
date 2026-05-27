@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hampers By Me - Curated Gifts With Love</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-container": "#481c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdad9",
+                        "primary-fixed-dim": "#fcb4b5",
+                        "on-surface-variant": "#524343",
+                        "on-surface": "#1b1c17",
+                        "surface-dim": "#dcdad2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#fcb4b5",
+                        "on-secondary-fixed": "#281719",
+                        "on-background": "#1b1c17",
+                        "inverse-on-surface": "#f3f1e9",
+                        "surface-bright": "#fbf9f1",
+                        "primary": "#864f50",
+                        "background": "#fbf9f1",
+                        "tertiary-fixed": "#ffe088",
+                        "inverse-surface": "#30312c",
+                        "surface-container-highest": "#e4e3db",
+                        "outline-variant": "#d6c2c1",
+                        "secondary-fixed": "#fbdbde",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#735c00",
+                        "on-primary-fixed": "#360e11",
+                        "secondary-fixed-dim": "#debfc2",
+                        "outline": "#847373",
+                        "surface-container-high": "#eae8e0",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#864f50",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#755d5f",
+                        "tertiary-container": "#cca72f",
+                        "surface": "#fbf9f1",
+                        "on-primary-fixed-variant": "#6b383a",
+                        "secondary": "#70585b",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f4ec",
+                        "surface-container": "#f0eee6",
+                        "primary-container": "#c08081",
+                        "surface-variant": "#e4e3db",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "secondary-container": "#f8d8db",
+                        "on-secondary-fixed-variant": "#574144"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "margin-desktop": "64px",
+                        "base": "8px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .cart-badge {
+            display: none;
+        }
+
+        .cart-badge.has-items {
+            display: flex;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .nav-link.active {
+            color: #864f50;
+            border-bottom: 2px solid #864f50;
+            padding-bottom: 4px;
+        }
+
+        .mobile-nav-link.active {
+            background-color: #f8d8db;
+            color: #755d5f;
+            border-radius: 9999px;
+            padding: 4px 16px;
+        }
+
+        .shadow-ambient {
+            box-shadow: 0 4px 20px rgba(192, 128, 129, 0.08);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+
+    <!-- TOP NAV -->
+    <nav
+        class="hidden md:flex bg-surface/90 backdrop-blur-md border-b border-outline-variant shadow-sm w-full top-0 z-50 sticky px-margin-desktop py-4 max-w-container-max mx-auto justify-between items-center">
+        <a class="font-headline-md text-headline-md font-bold text-primary cursor-pointer"
+            onclick="showPage('home')">Hampers By Me</a>
+        <div class="flex gap-8 items-center">
+            <a class="nav-link font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                onclick="showPage('shop')">Shop</a>
+            <a class="nav-link font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                onclick="showPage('custom')">Custom Order</a>
+            <a class="nav-link font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                onclick="showPage('about')">About</a>
+            <a class="nav-link font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                onclick="showPage('contact')">Contact</a>
+        </div>
+        <div class="flex gap-4 items-center">
+            <button class="relative text-primary hover:text-primary-fixed scale-95 active:scale-90 transition-transform"
+                onclick="showPage('cart')">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span id="cart-badge-desktop"
+                    class="cart-badge absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold rounded-full w-5 h-5 items-center justify-center">0</span>
+            </button>
+            <button class="text-primary hover:text-primary-fixed scale-95 active:scale-90 transition-transform">
+                <span class="material-symbols-outlined">chat</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE TOP BAR -->
+    <div
+        class="md:hidden bg-surface/90 backdrop-blur-md sticky top-0 z-50 w-full shadow-sm py-4 px-margin-mobile flex justify-between items-center">
+        <a class="font-headline-md text-headline-md font-bold text-primary cursor-pointer"
+            onclick="showPage('home')">Hampers By Me</a>
+        <button class="relative text-primary hover:opacity-80" onclick="showPage('cart')">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span id="cart-badge-mobile"
+                class="cart-badge absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold rounded-full w-5 h-5 items-center justify-center">0</span>
+        </button>
+    </div>
+
+    <!-- ===================== HOME PAGE ===================== -->
+    <div id="page-home" class="page active">
+        <main class="min-h-screen pb-[100px] md:pb-0">
+            <!-- Hero -->
+            <section class="relative w-full h-[600px] min-h-[500px] flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img alt="Hero Background" class="w-full h-full object-cover object-center opacity-60"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNa4R4PM97Mlfoco_-SSZozxxa20lRx65r4Hkjpl4YAPcVM--2-7C5lo7a64qff5_H7ibiN0pN4gmLZoAsq-K5wUS4wqqkkTtKrWsOk8HqXVDkhcr2Cn2VEgdIcRjVcF0_rdwCqEXS9xuLArWyyFNFdNi5Q_uMOLL1zul3bXjML5SwGdt4w7oQCE8CUTiswudpNTFk04Zv5lw3QfivI6IJAILalwIEpLA9cyCXtQsdu3C2Ef6nrUCFmmEx7RZGXXmRyO4qMka9N3zU" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-surface-bright via-surface-bright/50 to-transparent">
+                    </div>
+                </div>
+                <div
+                    class="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto flex flex-col items-center">
+                    <h1 class="font-headline-xl text-headline-xl text-primary mb-6 drop-shadow-sm">Gifting, Made
+                        Beautiful</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">Curated, handcrafted
+                        hampers designed to celebrate life's special moments with an artisanal touch.</p>
+                    <button onclick="showPage('shop')"
+                        class="bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider px-8 py-4 rounded-full shadow-[0_8px_24px_rgba(192,128,129,0.15)] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(192,128,129,0.2)] transition-all duration-300">Shop
+                        Hampers</button>
+                </div>
+            </section>
+
+            <!-- Trust Bar -->
+            <section class="w-full bg-surface-container-low py-6 border-y border-outline-variant/30">
+                <div
+                    class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-wrap justify-center md:justify-between items-center gap-6">
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-[20px]"
+                            style="font-variation-settings:'FILL' 1;">local_shipping</span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant">PAN India Delivery</span>
+                    </div>
+                    <div class="hidden md:block w-1 h-1 rounded-full bg-primary-container"></div>
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-[20px]"
+                            style="font-variation-settings:'FILL' 1;">favorite</span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant">Handcrafted with Love</span>
+                    </div>
+                    <div class="hidden md:block w-1 h-1 rounded-full bg-primary-container"></div>
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-[20px]"
+                            style="font-variation-settings:'FILL' 1;">design_services</span>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant">Custom Orders Welcome</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Collections -->
+            <section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Curated Collections</h2>
+                    <div class="w-16 h-[1px] bg-primary-container mx-auto mb-4"></div>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Discover our handpicked selections for
+                        every occasion.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <div onclick="showPage('shop')"
+                        class="md:col-span-8 group cursor-pointer relative rounded-xl overflow-hidden shadow-ambient bg-surface-container-lowest border border-outline-variant/20 hover:shadow-[0_16px_40px_rgba(192,128,129,0.12)] transition-all duration-500">
+                        <div class="w-full h-[400px] overflow-hidden">
+                            <img alt="Luxury Hampers"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxlrEw776N3Sthl6PRI_oo_GkELgFUU7oyIbsJtREfOk7TH_hNqCyrxI1C2DKU_H0tbcTTLQMm8YyCj-MCTtxzwnEyaZK7snZVvavbG5WDoBpZjS98YKr2Wr3fst_pKjgwUEYfbrIMDjLUP0HLIZJtyyv4UZGUe08OXwd1NIr2018O4whUpJo8frgnk6iypGBJd_R-w3DV2O4ZnY1W0dpunk6KbXayDjQll28zjK2dBxfyz7LTGqLEFuMgryvvmrMZ3te5vfa0oNfx" />
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface-bright/95 to-transparent">
+                            <h3 class="font-headline-md text-headline-md text-primary mb-2">Signature Hampers</h3>
+                            <span
+                                class="inline-flex items-center text-primary font-label-caps text-label-caps uppercase tracking-wider">Explore
+                                Collection <span
+                                    class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span></span>
+                        </div>
+                    </div>
+                    <div onclick="showPage('shop')"
+                        class="md:col-span-4 group cursor-pointer relative rounded-xl overflow-hidden shadow-ambient bg-surface-container-lowest border border-outline-variant/20 hover:shadow-[0_16px_40px_rgba(192,128,129,0.12)] transition-all duration-500">
+                        <div class="w-full h-[400px] overflow-hidden">
+                            <img alt="Artisan Bangles"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMUDyTNOZQXPHQ5jR3v1v0lcgQAxeG1EqpIYadsAeuoOkK0JbD1Xl2XvFL8WgLc8D6Iwi4F5zWIFl_En8kqyXBVlC78xq81xltnt0uoS2bmLSaM09eAc7pO3LaytY7-OO9W-VdAUE_uzSx6K8wToweF61GmPFC1GPLZwDipMw_OiCX_3tHr2fMZGw-TMgyT8zlSVECOSRAe56YbIOyTBUpmnER5TcYDyJE8v1x5QJJpadiV0pZe_kMOfWoq8dg3Cu7bKmBkz27vNOb" />
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-surface-bright/95 to-transparent">
+                            <h3 class="font-headline-md text-headline-md text-primary mb-2">Artisan Bangles</h3>
+                            <span
+                                class="inline-flex items-center text-primary font-label-caps text-label-caps uppercase tracking-wider">View
+                                Pieces <span
+                                    class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section class="py-24 bg-surface-container-low">
+                <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                    <div class="text-center mb-16">
+                        <h2 class="font-headline-lg text-headline-lg text-primary mb-4">How It Works</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Simple steps to thoughtful gifting.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="flex flex-col items-center text-center">
+                            <div
+                                class="w-32 h-32 rounded-full bg-surface-container-lowest border border-outline-variant shadow-[0_4px_16px_rgba(192,128,129,0.1)] flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-[48px] text-primary"
+                                    style="font-variation-settings:'wght' 200;">search</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-primary mb-3">1. Browse</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant max-w-[250px]">Explore our
+                                curated collections of hampers, bangles, and sets.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <div
+                                class="w-32 h-32 rounded-full bg-surface-container-lowest border border-outline-variant shadow-[0_4px_16px_rgba(192,128,129,0.1)] flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-[48px] text-primary"
+                                    style="font-variation-settings:'wght' 200;">draw</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-primary mb-3">2. Customise</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant max-w-[250px]">Add personal
+                                notes or request specific items for a unique touch.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <div
+                                class="w-32 h-32 rounded-full bg-surface-container-lowest border border-outline-variant shadow-[0_4px_16px_rgba(192,128,129,0.1)] flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-[48px] text-primary"
+                                    style="font-variation-settings:'wght' 200;">redeem</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-primary mb-3">3. Delivered</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant max-w-[250px]">We beautifully
+                                package and deliver your gift across India.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- WhatsApp Float -->
+        <a href="https://wa.me/919084460672"
+            class="fixed bottom-[90px] md:bottom-8 right-4 md:right-8 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:scale-110 transition-all duration-300 z-40">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- ===================== SHOP PAGE ===================== -->
+    <div id="page-shop" class="page">
+        <main
+            class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col md:flex-row gap-gutter pb-24 md:pb-12">
+            <!-- Sidebar Filter -->
+            <aside class="w-full md:w-64 flex-shrink-0">
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-ambient">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-6">Filters</h2>
+                    <div class="mb-6">
+                        <h3
+                            class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">
+                            Category</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer"><input checked
+                                    class="rounded text-primary border-outline-variant" type="checkbox"><span
+                                    class="font-body-sm text-body-sm text-on-surface">Hampers</span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input
+                                    class="rounded text-primary border-outline-variant" type="checkbox"><span
+                                    class="font-body-sm text-body-sm text-on-surface">Bangles</span></label>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h3
+                            class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">
+                            Occasion</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer"><input
+                                    class="rounded text-primary border-outline-variant" type="checkbox"><span
+                                    class="font-body-sm text-body-sm text-on-surface">Birthday</span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input checked
+                                    class="rounded text-primary border-outline-variant" type="checkbox"><span
+                                    class="font-body-sm text-body-sm text-on-surface">Wedding</span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input
+                                    class="rounded text-primary border-outline-variant" type="checkbox"><span
+                                    class="font-body-sm text-body-sm text-on-surface">Diwali</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3
+                            class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">
+                            Price Range</h3>
+                        <input class="w-full" max="10000" min="0" type="range" style="accent-color:#864f50;">
+                        <div class="flex justify-between mt-2 font-body-sm text-body-sm text-on-surface-variant">
+                            <span>₹0</span><span>₹10,000+</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- Product Grid -->
+            <div class="flex-grow">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="font-headline-lg text-headline-lg text-on-surface">Curated Hampers</h1>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Showing 4 results</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-gutter">
+                    <!-- Product 1 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
+                        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showPage('product')">
+                            <img alt="Royal Jasmine Box"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnEko3e2QQQqfr8kVUvzkprwpOyBSd9jtGpymOZkXZmksTyN5vnIEzY2v2j9Jp4jBU9REg8BakOdekjniLo6Pt2ezXYavUegstQbr5NFYUBgdmfCnlHT8O1CJAX8a8F0htEBL4vbvTxlgW2XrVf2rY__qGLcBeukv9X2Yk4-29BLlh_Iyhahs909Uh_ljH-fuhVxMCkUBANzxLiAazd5Zc9ucGjsDxCAkVGSOkQwP9DEibzaNIXbROena9VCfc22kpdfM65wATmjfC" />
+                            <span
+                                class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">Wedding</span>
+                        </div>
+                        <div class="p-4 flex flex-col gap-2">
+                            <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer"
+                                onclick="showPage('product')">The Royal Jasmine Box</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">A luxurious assortment of
+                                jasmine-infused teas, handcrafted sweets, and a gold-plated diya.</p>
+                            <p class="font-body-lg text-body-lg text-primary font-medium mt-2">₹9,500</p>
+                            <div class="flex gap-2 mt-4">
+                                <button
+                                    onclick="addToCart('The Royal Jasmine Box', 9500, 'https://lh3.googleusercontent.com/aida-public/AB6AXuCnEko3e2QQQqfr8kVUvzkprwpOyBSd9jtGpymOZkXZmksTyN5vnIEzY2v2j9Jp4jBU9REg8BakOdekjniLo6Pt2ezXYavUegstQbr5NFYUBgdmfCnlHT8O1CJAX8a8F0htEBL4vbvTxlgW2XrVf2rY__qGLcBeukv9X2Yk4-29BLlh_Iyhahs909Uh_ljH-fuhVxMCkUBANzxLiAazd5Zc9ucGjsDxCAkVGSOkQwP9DEibzaNIXbROena9VCfc22kpdfM65wATmjfC')"
+                                    class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add
+                                    to Cart</button>
+                                <button onclick="showPage('custom')"
+                                    class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
+                        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showPage('product')">
+                            <img alt="Festive Radiance"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNmHXBn6RMLspPkPMIRIhYv27JQ9wxOcaZKbeMLVUzwai6zJ8Y-zerA050AqqvrcqIkizWXfZTYXw3ll6PtW88_DgriDhiYkjqld4VTXnwVheU8jHArHrn9HVumvdt7zvOMnQXXQL6U26B2OVNOFzE6CmnGD1p5U0mDWpR7gZFdcurON8dq4DPjeHTnlJkcZ83xkg1XnlwLgH6-I8OYogK03oRDCZ9_hvb8mF8kLLXkaIEbMbY_pZnML31oDmIVHQY_w6stTpcxNIH" />
+                            <span
+                                class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">Diwali</span>
+                        </div>
+                        <div class="p-4 flex flex-col gap-2">
+                            <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer"
+                                onclick="showPage('product')">Festive Radiance</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Celebrate the festival of
+                                lights with handcrafted bangles, a brass lantern, and dry fruits.</p>
+                            <p class="font-body-lg text-body-lg text-primary font-medium mt-2">₹6,500</p>
+                            <div class="flex gap-2 mt-4">
+                                <button
+                                    onclick="addToCart('Festive Radiance', 6500, 'https://lh3.googleusercontent.com/aida-public/AB6AXuDNmHXBn6RMLspPkPMIRIhYv27JQ9wxOcaZKbeMLVUzwai6zJ8Y-zerA050AqqvrcqIkizWXfZTYXw3ll6PtW88_DgriDhiYkjqld4VTXnwVheU8jHArHrn9HVumvdt7zvOMnQXXQL6U26B2OVNOFzE6CmnGD1p5U0mDWpR7gZFdcurON8dq4DPjeHTnlJkcZ83xkg1XnlwLgH6-I8OYogK03oRDCZ9_hvb8mF8kLLXkaIEbMbY_pZnML31oDmIVHQY_w6stTpcxNIH')"
+                                    class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add
+                                    to Cart</button>
+                                <button onclick="showPage('custom')"
+                                    class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
+                        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showPage('product')">
+                            <img alt="Sweet Sentiments"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAxQ1IBbQ9-hhl0TTFsyGq43m1EgLzU5kKx83v-yErR0H2LJbPHQd3qwZ8ry_jVQ8mUMTeHev4NzcXQonVc1mqc6M8oQp2RtyeChkMNIx1i4eGl_VJxBLSTb8W3is2u5vb0LU56F46ajYfOUjMLuvJOo0byVWyFcq2CHYz3eMT6ZGWfgG5qRSzZGWi50EVXZzg_CSARV_D2S8TIQCmUO4NLw0wqHHD-WBRWX7YR7Ayaq-Zxzv6f27CSmC5hu51RBHmEYpd4bKhG8nQ" />
+                            <span
+                                class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">Birthday</span>
+                        </div>
+                        <div class="p-4 flex flex-col gap-2">
+                            <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer"
+                                onclick="showPage('product')">Sweet Sentiments</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">A thoughtful collection of
+                                artisanal chocolates, raw honey, and a dried floral arrangement.</p>
+                            <p class="font-body-lg text-body-lg text-primary font-medium mt-2">₹4,500</p>
+                            <div class="flex gap-2 mt-4">
+                                <button
+                                    onclick="addToCart('Sweet Sentiments', 4500, 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAxQ1IBbQ9-hhl0TTFsyGq43m1EgLzU5kKx83v-yErR0H2LJbPHQd3qwZ8ry_jVQ8mUMTeHev4NzcXQonVc1mqc6M8oQp2RtyeChkMNIx1i4eGl_VJxBLSTb8W3is2u5vb0LU56F46ajYfOUjMLuvJOo0byVWyFcq2CHYz3eMT6ZGWfgG5qRSzZGWi50EVXZzg_CSARV_D2S8TIQCmUO4NLw0wqHHD-WBRWX7YR7Ayaq-Zxzv6f27CSmC5hu51RBHmEYpd4bKhG8nQ')"
+                                    class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add
+                                    to Cart</button>
+                                <button onclick="showPage('custom')"
+                                    class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 4 -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
+                        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showPage('product')">
+                            <img alt="Rose Gold Essence"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdI8csmQWIftzlDthyvAfeOI-CNDQs_kIMQnFHAIDgv-b06f77lP2jOQc5J5fRZFgRpo6pXo5n3PIWMb9PLDak_ZZBLFjZJogKCpQXQNc0ZJJIsK0kuIUd6sa5qOt7S9iaunENox6_qFN0pfBPparuq1cE8Jp8VlWCr4rxcSO4z7NbgYXOsMw2l8bUFbc1k7ypUKY0AIKJyIHUHf9BAbgCkM3EpO1o6gkH85ge54ueJ9qOWhGm2EQ7jwNqWZDZf5NJt7MJFISxlZ-G" />
+                            <span
+                                class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">Bangles</span>
+                        </div>
+                        <div class="p-4 flex flex-col gap-2">
+                            <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer"
+                                onclick="showPage('product')">Rose Gold Essence</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Intricately designed bangles
+                                featuring rose gold finish and subtle pink stone embellishments.</p>
+                            <p class="font-body-lg text-body-lg text-primary font-medium mt-2">₹7,200</p>
+                            <div class="flex gap-2 mt-4">
+                                <button
+                                    onclick="addToCart('Rose Gold Essence', 7200, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdI8csmQWIftzlDthyvAfeOI-CNDQs_kIMQnFHAIDgv-b06f77lP2jOQc5J5fRZFgRpo6pXo5n3PIWMb9PLDak_ZZBLFjZJogKCpQXQNc0ZJJIsK0kuIUd6sa5qOt7S9iaunENox6_qFN0pfBPparuq1cE8Jp8VlWCr4rxcSO4z7NbgYXOsMw2l8bUFbc1k7ypUKY0AIKJyIHUHf9BAbgCkM3EpO1o6gkH85ge54ueJ9qOWhGm2EQ7jwNqWZDZf5NJt7MJFISxlZ-G')"
+                                    class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add
+                                    to Cart</button>
+                                <button onclick="showPage('custom')"
+                                    class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===================== PRODUCT DETAIL PAGE ===================== -->
+    <div id="page-product" class="page">
+        <main
+            class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20 space-y-24 pb-24 md:pb-20">
+            <div class="mb-4">
+                <button onclick="showPage('shop')"
+                    class="flex items-center gap-1 text-primary font-body-sm text-body-sm hover:underline">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back to Shop
+                </button>
+            </div>
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+                <div class="lg:col-span-7 space-y-4">
+                    <div
+                        class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/50 shadow-ambient">
+                        <img alt="Heritage Bloom Hamper" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq8ymSMSLITmsJS-GfGU2bguD0WdOBxuFb0wn7pUeBZnGIyAvuGMM0SP9x4OC_-48yHyPQQuiCzS4-WpyD3cFabbaiH2nU7SkJJwE2xINpZw8IHQY4MiXuNNMWIiCYQIMzOExZ5EjD4v9bUjFIGCaG4Ze-XwIsS87h7oAsNauZuA7ZeXxI2ng3nYy0CPt6o7xv881pobFPcEc9hFh6spVH89Q_Ca7hj6u3KIA9MVmhkdgKXCZE3v7qSWq44gxc8vjmjpPIXQE04Va_" />
+                        <div class="absolute top-4 left-4 flex flex-col gap-2">
+                            <span
+                                class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full shadow-sm">Best
+                                Seller</span>
+                            <span
+                                class="bg-surface/90 backdrop-blur text-primary font-label-caps text-label-caps px-3 py-1 rounded-full shadow-sm border border-outline-variant/50">Artisan
+                                Made</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col space-y-8">
+                    <div>
+                        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">The Heritage Bloom Hamper
+                        </h1>
+                        <p class="font-headline-md text-headline-md text-primary mb-4">₹ 4,500</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">A carefully curated collection of
+                            artisanal treats and self-care luxuries, designed to bring a moment of peace and warmth.
+                            Perfect for celebrations or a thoughtful 'thinking of you' gesture.</p>
+                    </div>
+                    <div
+                        class="h-[1px] w-full bg-gradient-to-r from-transparent via-tertiary-container/30 to-transparent">
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Personal
+                                Message Card (Optional)</label>
+                            <textarea
+                                class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-lg p-3 font-body-sm text-body-sm focus:border-primary focus:outline-none transition-colors"
+                                placeholder="Write a heartfelt note..." rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">Check
+                                Delivery Availability</label>
+                            <div class="flex gap-2">
+                                <input
+                                    class="flex-grow bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-4 py-2 font-body-sm text-body-sm focus:border-primary focus:outline-none"
+                                    placeholder="Enter 6-digit Pincode" type="text" />
+                                <button
+                                    class="px-6 py-2 border border-tertiary-container text-tertiary font-label-caps text-label-caps rounded-lg hover:bg-surface-container transition-colors">Check</button>
+                            </div>
+                            <p class="font-body-sm text-[12px] text-primary mt-2 flex items-center gap-1"><span
+                                    class="material-symbols-outlined text-[16px]">local_shipping</span> Ships PAN India
+                                within 3-5 business days.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 pt-4">
+                        <button
+                            onclick="addToCart('The Heritage Bloom Hamper', 4500, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAq8ymSMSLITmsJS-GfGU2bguD0WdOBxuFb0wn7pUeBZnGIyAvuGMM0SP9x4OC_-48yHyPQQuiCzS4-WpyD3cFabbaiH2nU7SkJJwE2xINpZw8IHQY4MiXuNNMWIiCYQIMzOExZ5EjD4v9bUjFIGCaG4Ze-XwIsS87h7oAsNauZuA7ZeXxI2ng3nYy0CPt6o7xv881pobFPcEc9hFh6spVH89Q_Ca7hj6u3KIA9MVmhkdgKXCZE3v7qSWq44gxc8vjmjpPIXQE04Va_'); showPage('cart')"
+                            class="w-full bg-primary hover:opacity-90 text-on-primary font-body-lg text-body-lg py-4 rounded-xl shadow-ambient transition-all flex justify-center items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">shopping_bag</span> Add to Cart
+                        </button>
+                        <button
+                            class="w-full bg-surface border border-outline-variant hover:border-primary text-on-surface font-body-md text-body-md py-3 rounded-xl transition-colors">Add
+                            to Wishlist</button>
+                    </div>
+                    <!-- What's Inside -->
+                    <div
+                        class="border border-outline-variant/30 rounded-xl overflow-hidden bg-surface-container-lowest">
+                        <details class="group" open>
+                            <summary
+                                class="flex justify-between items-center font-headline-md text-[20px] p-4 cursor-pointer list-none bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">
+                                <span>What's Inside</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+                            </summary>
+                            <div class="p-4 border-t border-outline-variant/30">
+                                <ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant">
+                                    <li class="flex items-start gap-3"><span
+                                            class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">check_circle</span><span>Artisanal
+                                            Dark Chocolate & Sea Salt Bar (100g)</span></li>
+                                    <li class="flex items-start gap-3"><span
+                                            class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">check_circle</span><span>Hand-poured
+                                            Soy Wax Candle - Lavender Woods</span></li>
+                                    <li class="flex items-start gap-3"><span
+                                            class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">check_circle</span><span>Organic
+                                            Wildflower Honey (150g) with wooden dipper</span></li>
+                                    <li class="flex items-start gap-3"><span
+                                            class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">check_circle</span><span>Boutique
+                                            loose-leaf Darjeeling Tea blend</span></li>
+                                    <li class="flex items-start gap-3"><span
+                                            class="material-symbols-outlined text-tertiary text-[18px] mt-0.5">check_circle</span><span>Premium
+                                            reusable seagrass basket with ribbon</span></li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ===================== CART PAGE ===================== -->
+    <div id="page-cart" class="page">
+        <main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 pb-32 md:pb-12">
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-8">Your Cart</h1>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Cart Items -->
+                <div class="md:col-span-7">
+                    <div id="cart-items-container">
+                        <!-- Items rendered by JS -->
+                    </div>
+                    <div id="cart-empty" class="hidden text-center py-24">
+                        <span class="material-symbols-outlined text-[64px] text-outline-variant">shopping_cart</span>
+                        <p class="font-headline-md text-headline-md text-on-surface-variant mt-4">Your cart is empty</p>
+                        <button onclick="showPage('shop')"
+                            class="mt-6 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider px-8 py-3 rounded-full hover:opacity-90 transition-all">Browse
+                            Products</button>
+                    </div>
+                </div>
+                <!-- Order Summary -->
+                <div class="md:col-span-5">
+                    <div id="cart-summary"
+                        class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-ambient sticky top-24">
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-6">Order Summary</h2>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                                <span>Subtotal</span><span id="cart-subtotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                                <span>Shipping</span><span class="text-primary">Free</span>
+                            </div>
+                            <div class="h-px bg-outline-variant/30"></div>
+                            <div class="flex justify-between font-headline-md text-headline-md text-on-surface">
+                                <span>Total</span><span id="cart-total" class="text-primary">₹0</span>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider py-4 rounded-xl hover:opacity-90 transition-all mb-3">Proceed
+                            to Checkout</button>
+                        <button onclick="showPage('shop')"
+                            class="w-full border border-outline-variant text-on-surface font-label-caps text-label-caps uppercase tracking-wider py-3 rounded-xl hover:border-primary transition-all">Continue
+                            Shopping</button>
+                        <div class="mt-6 flex items-center gap-2 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[18px]">lock</span>
+                            <span class="font-body-sm text-body-sm">Secure checkout with Razorpay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===================== CUSTOM ORDER PAGE ===================== -->
+    <div id="page-custom" class="page">
+        <main
+            class="flex-grow flex flex-col items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-12 md:py-24 pb-32 md:pb-24">
+            <div class="text-center mb-16 md:mb-24 max-w-2xl">
+                <h1 class="font-headline-xl text-headline-xl text-primary mb-6">Custom Order</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Every hamper is made to order with
+                    love. Let us curate a bespoke gifting experience tailored perfectly to your occasion and
+                    preferences.</p>
+                <div class="flex items-center justify-center gap-4 text-outline-variant">
+                    <div class="h-px w-16 bg-outline-variant"></div>
+                    <span class="material-symbols-outlined text-primary-container"
+                        style="font-variation-settings:'FILL' 1;">local_florist</span>
+                    <div class="h-px w-16 bg-outline-variant"></div>
+                </div>
+            </div>
+            <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+                <div class="md:col-span-5 hidden md:flex flex-col gap-8 sticky top-32">
+                    <div
+                        class="rounded-xl overflow-hidden border border-primary-container p-2 bg-surface-container-lowest shadow-ambient">
+                        <img alt="Custom Hamper" class="w-full h-[500px] object-cover rounded-lg"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpVk424m_uliOjICsKvSjP2fIbupbWyCYKeYhs5ps60xOq9r8iK69v6AO2arrJcPvx2E7Zo0MF-uQulvZfPg0R-uX9c9cZaomHP3vmJFnyFhHEfSYVwFU9-5Csp8R1OuUTfD2PbPMR-YCLSbtDWnP1lsLvfI_IU71YgWcFDnJGI5cE6C1AbtJ-x7iYVYlNtMF18S6vuwo51d4zsCEiNVcXZBxp8Y69LZa1l47onZlntOYpMt3j5YpnwSniLOnIImL_FZ1YIZvwmzD_" />
+                    </div>
+                </div>
+                <div
+                    class="md:col-span-7 w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-8 md:p-12 shadow-ambient">
+                    <h2 class="font-headline-md text-headline-md text-primary mb-8">Design Your Hamper</h2>
+                    <div class="flex flex-col gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Your
+                                    Name</label>
+                                <input
+                                    class="bg-surface border border-outline-variant rounded-md px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors w-full"
+                                    placeholder="e.g. Kamini Sharma" type="text" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Occasion</label>
+                                <select
+                                    class="bg-surface border border-outline-variant rounded-md px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors w-full">
+                                    <option disabled selected value="">Select an occasion</option>
+                                    <option value="wedding">Wedding / Anniversary</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="baby">Baby Shower</option>
+                                    <option value="corporate">Corporate Gift</option>
+                                    <option value="diwali">Diwali</option>
+                                    <option value="other">Just Because</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label
+                                class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Estimated
+                                Budget</label>
+                            <select
+                                class="bg-surface border border-outline-variant rounded-md px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors w-full">
+                                <option disabled selected value="">Select your range</option>
+                                <option value="under2000">Under ₹2,000</option>
+                                <option value="2000to5000">₹2,000 - ₹5,000</option>
+                                <option value="5000to10000">₹5,000 - ₹10,000</option>
+                                <option value="over10000">₹10,000+</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label
+                                class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Preferred
+                                Items & Vibes</label>
+                            <textarea
+                                class="bg-surface border border-outline-variant rounded-md px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors w-full resize-none"
+                                placeholder="e.g. Include artisanal chocolates, a lavender candle, and keep the colors soft pink and gold..."
+                                rows="3"></textarea>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label
+                                class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gift
+                                Message</label>
+                            <textarea
+                                class="bg-surface border border-outline-variant rounded-md px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary transition-colors w-full resize-none"
+                                placeholder="Write a heartfelt note for the recipient..." rows="3"></textarea>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 mt-6 pt-6 border-t border-surface-variant">
+                            <button
+                                class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider px-6 py-4 rounded-full hover:opacity-90 transition-colors shadow-sm active:scale-95 duration-200">Submit
+                                Request</button>
+                            <a href="https://wa.me/919084460672"
+                                class="flex-1 bg-surface border border-tertiary-container text-tertiary font-label-caps text-label-caps uppercase tracking-wider px-6 py-4 rounded-full hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2 active:scale-95 duration-200">
+                                <span class="material-symbols-outlined text-[18px]">forum</span> Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===================== ABOUT PAGE ===================== -->
+    <div id="page-about" class="page">
+        <main class="w-full pb-32 md:pb-16">
+            <section
+                class="relative w-full min-h-[500px] flex items-center justify-center bg-surface-container-low overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3">
+                </div>
+                <div class="relative z-10 text-center px-margin-mobile max-w-3xl mx-auto py-20">
+                    <span class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-6 block">Our
+                        Story</span>
+                    <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">Curated Gifts <br /><span
+                            class="text-primary italic font-normal">With Love</span></h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Born from a passion
+                        for thoughtful gifting, we craft hampers that tell a story. Every ribbon tied and product chosen
+                        is a testament to our belief that the best gifts are deeply personal.</p>
+                </div>
+            </section>
+            <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+                    <div class="md:col-span-5 relative order-2 md:order-1 mt-12 md:mt-0">
+                        <div
+                            class="relative rounded-t-full rounded-b-lg overflow-hidden shadow-ambient aspect-[4/5] border border-outline-variant/30">
+                            <img alt="Founder" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiJaZmNA0EU1cvQ77A1-1DfWRmZZ7iILVRDgSnYpQjIxMj13aITd1OVGh_j2px_JG80AXjcu466Um__i5S3nX1tme0EqFdFLDiaSAi6XjzImAYI7cIOWSGRnxPgKlGYXx4-b1wvTaEk_5FanMhzvZe9EHNSz67Rll5CWbaHU-Shb-vA8bi_JBN-GTF_2vcV-ITyAa3IGsotZS4y0AD9mpB5IvL_3DmrUflmckSwoherpwOh019Qa8aBgIGWnw8x8MeFuaLlyCY5Tp6" />
+                        </div>
+                    </div>
+                    <div class="md:col-span-6 md:col-start-7 order-1 md:order-2 space-y-8">
+                        <div>
+                            <span
+                                class="font-label-caps text-label-caps text-primary tracking-wider uppercase mb-2 block">Meet
+                                The Maker</span>
+                            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Hello, I'm Kamini.</h2>
+                            <div class="space-y-6 font-body-md text-body-md text-on-surface-variant">
+                                <p>What started as a small endeavor to create meaningful gifts for close friends quickly
+                                    blossomed into Hampers By Me. I realized that in a world of quick clicks and instant
+                                    deliveries, the art of genuine, considered gifting was getting lost.</p>
+                                <p>I wanted to bring back the feeling of unboxing something truly special—where the
+                                    packaging itself feels like a warm embrace. Every hamper we curate is assembled by
+                                    hand in our small studio, ensuring that the love and intention behind your gift are
+                                    palpable the moment it arrives.</p>
+                                <p class="font-medium text-primary italic text-lg">"A gift isn't just an object; it's a
+                                    feeling, perfectly packaged."</p>
+                            </div>
+                        </div>
+                        <button onclick="showPage('contact')"
+                            class="bg-primary text-on-primary font-label-caps text-label-caps px-8 py-3 rounded-full hover:opacity-90 transition-all shadow-ambient tracking-wider uppercase">Get
+                            In Touch</button>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-surface-container-low py-20 md:py-32">
+                <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                    <div class="text-center mb-16">
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Why Hampers By Me?</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">The details make
+                            the difference.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
+                                <span class="material-symbols-outlined">volunteer_activism</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Handcrafted Quality</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Each hamper is meticulously
+                                assembled by hand, ensuring perfect placement, beautiful ribbon work, and an artisan
+                                touch you can feel.</p>
+                        </div>
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
+                                <span class="material-symbols-outlined">local_shipping</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-3">PAN India Reach</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Distance shouldn't dim a
+                                celebration. We ensure safe, secure, and beautiful deliveries to loved ones across
+                                India, right to their doorstep.</p>
+                        </div>
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+                            <div
+                                class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
+                                <span class="material-symbols-outlined">diamond</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Curated Luxury</h3>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">We source only premium, mostly
+                                artisanal products. From gourmet treats to bespoke ceramics, every item is chosen for
+                                its superior quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ===================== CONTACT PAGE ===================== -->
+    <div id="page-contact" class="page">
+        <main
+            class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[80px] md:py-[120px] pb-32 md:pb-24">
+            <div class="text-center mb-[80px] max-w-2xl mx-auto">
+                <h1 class="font-headline-xl text-headline-xl text-primary mb-4">Let's Connect</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">We're here to help you curate the perfect
+                    gift. Reach out with questions, custom requests, or simply to say hello.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+                <div class="md:col-span-5 space-y-6">
+                    <a class="group block bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8 hover:shadow-[0_8px_24px_rgba(192,128,129,0.12)] transition-all duration-300 relative overflow-hidden"
+                        href="https://mail.google.com/mail/?view=cm&to=kamin4ikumari002@gmail.com" target="_blank">
+                        <div
+                            class="absolute inset-0 bg-secondary-container/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="relative z-10 flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined">mail</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Email Us</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-2">For detailed inquiries
+                                    and support.</p>
+                                <span
+                                    class="font-body-sm text-body-sm text-primary group-hover:underline underline-offset-4">kamin4ikumari002@gmail.com</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8 hover:shadow-[0_8px_24px_rgba(192,128,129,0.12)] transition-all duration-300 relative overflow-hidden"
+                        href="https://wa.me/919084460672">
+                        <div
+                            class="absolute inset-0 bg-secondary-container/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="relative z-10 flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined">forum</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-1">WhatsApp</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-2">Quick responses for
+                                    urgent questions.</p>
+                                <span
+                                    class="font-body-sm text-body-sm text-primary group-hover:underline underline-offset-4">Message
+                                    +91 90844 60672</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="group block bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8 hover:shadow-[0_8px_24px_rgba(192,128,129,0.12)] transition-all duration-300 relative overflow-hidden"
+                        href="https://www.instagram.com/hampers_by_me_2/" target="_blank">
+                        <div
+                            class="absolute inset-0 bg-secondary-container/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                        </div>
+                        <div class="relative z-10 flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
+                                <span class="material-symbols-outlined">photo_camera</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Instagram</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant mb-2">Slide into our DMs for
+                                    quick chats.</p>
+                                <span
+                                    class="font-body-sm text-body-sm text-primary group-hover:underline underline-offset-4">@hampers_by_me_2</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:block md:col-span-1"></div>
+                <div class="md:col-span-6 mt-12 md:mt-0">
+                    <h2
+                        class="font-headline-lg text-headline-lg text-primary mb-8 pb-4 border-b border-outline-variant/50">
+                        Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <details
+                            class="group bg-surface-container-lowest border border-outline-variant/30 rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer hover:bg-surface-container-low transition-colors duration-300 list-none">
+                                <span class="font-body-lg text-body-lg font-medium text-on-surface">How long does
+                                    shipping take?</span>
+                                <span
+                                    class="material-symbols-outlined text-primary group-open:-rotate-180 transition-transform duration-300">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="p-6 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                Standard shipping typically takes 3-5 business days within India. We also offer express
+                                delivery options. During festive seasons, please allow an extra 1-2 days for processing.
+                            </div>
+                        </details>
+                        <details
+                            class="group bg-surface-container-lowest border border-outline-variant/30 rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer hover:bg-surface-container-low transition-colors duration-300 list-none">
+                                <span class="font-body-lg text-body-lg font-medium text-on-surface">Can I create a fully
+                                    custom hamper?</span>
+                                <span
+                                    class="material-symbols-outlined text-primary group-open:-rotate-180 transition-transform duration-300">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="p-6 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                Absolutely! We love curating bespoke gifts. Reach out via email or WhatsApp with your
+                                budget, theme, and preferences, and we'll put together a custom proposal for you. Please
+                                allow 48 hours for custom quotes.</div>
+                        </details>
+                        <details
+                            class="group bg-surface-container-lowest border border-outline-variant/30 rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer hover:bg-surface-container-low transition-colors duration-300 list-none">
+                                <span class="font-body-lg text-body-lg font-medium text-on-surface">What is your return
+                                    policy?</span>
+                                <span
+                                    class="material-symbols-outlined text-primary group-open:-rotate-180 transition-transform duration-300">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="p-6 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed">Due
+                                to the perishable and personalized nature of our hampers, we generally do not accept
+                                returns. However, if your hamper arrives damaged, please contact us within 24 hours with
+                                photos and we will make it right.</div>
+                        </details>
+                        <details
+                            class="group bg-surface-container-lowest border border-outline-variant/30 rounded-xl overflow-hidden">
+                            <summary
+                                class="flex items-center justify-between p-6 cursor-pointer hover:bg-surface-container-low transition-colors duration-300 list-none">
+                                <span class="font-body-lg text-body-lg font-medium text-on-surface">Do you offer
+                                    corporate gifting?</span>
+                                <span
+                                    class="material-symbols-outlined text-primary group-open:-rotate-180 transition-transform duration-300">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="p-6 pt-0 font-body-md text-body-md text-on-surface-variant leading-relaxed">Yes,
+                                we provide corporate gifting services including brand personalization and bulk shipping.
+                                Please email us at kamin4ikumari002@gmail.com to request our corporate brochure.</div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="bg-surface-container-lowest border-t border-outline-variant w-full pb-24 md:pb-0">
+        <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto">
+            <div class="col-span-1 md:col-span-2 mb-8 md:mb-0">
+                <p class="font-headline-md text-headline-md text-primary mb-2">Hampers By Me</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Curating moments of joy through artisanal
+                    gifting, deeply rooted in heritage and handcrafted with love.</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-4">© 2025 Hampers By Me. All rights
+                    reserved.</p>
+            </div>
+            <div class="col-span-1 flex flex-col space-y-3">
+                <span class="font-label-caps text-label-caps text-on-surface mb-2">Explore</span>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    onclick="showPage('shop')">Shop All</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    onclick="showPage('custom')">Custom Orders</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    onclick="showPage('about')">About Us</a>
+            </div>
+            <div class="col-span-1 flex flex-col space-y-3">
+                <span class="font-label-caps text-label-caps text-on-surface mb-2">Support</span>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    onclick="showPage('contact')">Contact Us</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    href="#">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+                    href="#">Shipping Info</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-2 px-4 pb-safe bg-surface-container-low/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(192,128,129,0.08)] z-50 rounded-t-xl">
+        <a id="mob-shop" class="mobile-nav-link flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer"
+            onclick="showPage('shop')">
+            <span class="material-symbols-outlined mb-1">storefront</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-[10px]">Shop</span>
+        </a>
+        <a id="mob-custom"
+            class="mobile-nav-link flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer"
+            onclick="showPage('custom')">
+            <span class="material-symbols-outlined mb-1">card_giftcard</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-[10px]">Custom</span>
+        </a>
+        <a id="mob-cart"
+            class="mobile-nav-link flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer relative"
+            onclick="showPage('cart')">
+            <span class="material-symbols-outlined mb-1">shopping_basket</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-[10px]">Cart</span>
+        </a>
+        <a id="mob-contact"
+            class="mobile-nav-link flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer"
+            onclick="showPage('contact')">
+            <span class="material-symbols-outlined mb-1">chat</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-[10px]">Contact</span>
+        </a>
+    </nav>
+
+    <script>
+        // ===== CART STATE =====
+        let cart = [];
+
+        function addToCart(name, price, img) {
+            const existing = cart.find(i => i.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, img, qty: 1 });
+            }
+            updateCartUI();
+            // Show toast
+            showToast(name + ' added to cart!');
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(i => i.name !== name);
+            updateCartUI();
+            renderCartPage();
+        }
+
+        function updateQty(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) removeFromCart(name);
+                else { updateCartUI(); renderCartPage(); }
+            }
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            const badges = document.querySelectorAll('#cart-badge-desktop, #cart-badge-mobile');
+            badges.forEach(b => {
+                b.textContent = count;
+                if (count > 0) b.classList.add('has-items');
+                else b.classList.remove('has-items');
+            });
+        }
+
+        function renderCartPage() {
+            const container = document.getElementById('cart-items-container');
+            const emptyMsg = document.getElementById('cart-empty');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+            } else {
+                emptyMsg.classList.add('hidden');
+                container.innerHTML = cart.map(item => `
+      <div class="flex gap-4 bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4 mb-4 shadow-ambient">
+        <img src="${item.img}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg flex-shrink-0"/>
+        <div class="flex-grow">
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-1">${item.name}</h3>
+          <p class="font-body-md text-body-md text-primary font-medium mb-3">₹${item.price.toLocaleString('en-IN')}</p>
+          <div class="flex items-center gap-3">
+            <button onclick="updateQty('${item.name}', -1)" class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors text-on-surface font-bold">-</button>
+            <span class="font-body-md text-body-md text-on-surface w-6 text-center">${item.qty}</span>
+            <button onclick="updateQty('${item.name}', 1)" class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors text-on-surface font-bold">+</button>
+            <button onclick="removeFromCart('${item.name}')" class="ml-auto text-error hover:opacity-80 transition-opacity">
+              <span class="material-symbols-outlined text-[20px]">delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            subtotalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
+            totalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
+        }
+
+        // ===== TOAST =====
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-20 right-4 z-[100] bg-primary text-on-primary font-body-sm text-body-sm px-6 py-3 rounded-full shadow-lg transition-all duration-300';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2000);
+        }
+
+        // ===== NAVIGATION =====
+        function showPage(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+
+            // Update desktop nav
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const navMap = { shop: 0, custom: 1, about: 2, contact: 3 };
+            if (navMap[page] !== undefined) {
+                document.querySelectorAll('.nav-link')[navMap[page]].classList.add('active');
+            }
+
+            // Update mobile nav
+            document.querySelectorAll('.mobile-nav-link').forEach(l => l.classList.remove('active'));
+            const mobEl = document.getElementById('mob-' + page);
+            if (mobEl) mobEl.classList.add('active');
+
+            // Render cart if needed
+            if (page === 'cart') renderCartPage();
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Init
+        showPage('home');
+    </script>
+</body>
+
+</html>
