@@ -133,90 +133,6 @@
         }
     </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // ===== SUPABASE CONFIG =====
-        const SUPABASE_URL = 'https://fvzzkfbpjcdsefpmyvvu.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_L8mIBUGG6AjLnbhCCMP3Ww_JN9-k6fM';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        // ===== LOAD PRODUCTS FROM SUPABASE =====
-        async function loadProducts() {
-            const grid = document.getElementById('products-grid');
-            const countEl = document.getElementById('product-count');
-
-            grid.innerHTML = '<div class="col-span-3 text-center py-16"><span class="material-symbols-outlined text-[48px] text-primary animate-spin">progress_activity</span><p class="font-body-md text-on-surface-variant mt-4">Loading products...</p></div>';
-
-            try {
-                const { data: products, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('in_stock', true)
-                    .order('id', { ascending: true });
-
-                if (error) throw error;
-
-                countEl.textContent = `Showing ${products.length} results`;
-
-                if (products.length === 0) {
-                    grid.innerHTML = '<div class="col-span-3 text-center py-16"><p class="font-body-md text-on-surface-variant">No products available right now.</p></div>';
-                    return;
-                }
-
-                grid.innerHTML = products.map(p => `
-      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
-        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showProductDetail(${p.id})">
-          <img alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${p.image_url}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Coming+Soon'"/>
-          <span class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">${p.occasion || p.category}</span>
-        </div>
-        <div class="p-4 flex flex-col gap-2">
-          <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer" onclick="showProductDetail(${p.id})">${p.name}</h3>
-          <p class="font-body-sm text-body-sm text-on-surface-variant">${p.description}</p>
-          <p class="font-body-lg text-body-lg text-primary font-medium mt-2">${p.price === 0 ? 'Price on Request' : '₹' + Number(p.price).toLocaleString('en-IN')}</p>
-          <div class="flex gap-2 mt-4">
-            ${p.price === 0
-                        ? `<button onclick="showPage('custom')" class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Enquire Now</button>`
-                        : `<button onclick="addToCart('${p.name.replace(/'/g, "\'")}', ${p.price}, '${p.image_url}')" class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add to Cart</button>`
-                    }
-            <button onclick="showPage('custom')" class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
-          </div>
-        </div>
-      </div>
-    `).join('');
-
-            } catch (err) {
-                console.error('Error loading products:', err);
-                grid.innerHTML = '<div class="col-span-3 text-center py-16"><p class="font-body-md text-error">Failed to load products. Please refresh.</p></div>';
-                countEl.textContent = '';
-            }
-        }
-
-        // ===== SHOW PRODUCT DETAIL =====
-        async function showProductDetail(id) {
-            showPage('product');
-            try {
-                const { data: p, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('id', id)
-                    .single();
-                if (error) throw error;
-                document.querySelector('#page-product img').src = p.image_url;
-                document.querySelector('#page-product h1').textContent = p.name;
-                document.querySelector('#page-product .text-primary.mb-4').textContent = p.price === 0 ? 'Price on Request' : '₹ ' + Number(p.price).toLocaleString('en-IN');
-                document.querySelector('#page-product p.text-on-surface-variant').textContent = p.description;
-                const addBtn = document.querySelector('#page-product button.bg-primary');
-                if (p.price > 0) {
-                    addBtn.onclick = () => { addToCart(p.name, p.price, p.image_url); showPage('cart'); };
-                } else {
-                    addBtn.textContent = 'Enquire Now';
-                    addBtn.onclick = () => showPage('custom');
-                }
-            } catch (err) {
-                console.error('Product detail error:', err);
-            }
-        }
-    </script>
 </head>
 
 <body class="bg-background text-on-background font-body-md antialiased">
@@ -449,7 +365,8 @@
                             Price Range</h3>
                         <input class="w-full" max="10000" min="0" type="range" style="accent-color:#864f50;">
                         <div class="flex justify-between mt-2 font-body-sm text-body-sm text-on-surface-variant">
-                            <span>₹0</span><span>₹10,000+</span></div>
+                            <span>₹0</span><span>₹10,000+</span>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -792,7 +709,8 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">volunteer_activism</span></div>
+                                    <span class="material-symbols-outlined">volunteer_activism</span>
+                                </div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Handcrafted Quality
                                 </h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">Each hamper is meticulously
@@ -803,7 +721,8 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">local_shipping</span></div>
+                                    <span class="material-symbols-outlined">local_shipping</span>
+                                </div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">PAN India Reach</h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">Distance shouldn't dim a
                                     celebration. We ensure safe, secure, and beautiful deliveries to loved ones across
@@ -813,7 +732,8 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">diamond</span></div>
+                                    <span class="material-symbols-outlined">diamond</span>
+                                </div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Curated Luxury</h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">We source only premium,
                                     mostly artisanal products. From gourmet treats to bespoke ceramics, every item is
@@ -844,7 +764,8 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">mail</span></div>
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Email Us</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">For detailed
@@ -862,7 +783,8 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">forum</span></div>
+                                    <span class="material-symbols-outlined">forum</span>
+                                </div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">WhatsApp</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">Quick responses
@@ -881,7 +803,8 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">photo_camera</span></div>
+                                    <span class="material-symbols-outlined">photo_camera</span>
+                                </div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Instagram</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">Slide into our DMs
@@ -1134,6 +1057,91 @@
 
             // Init
             showPage('home');
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script>
+            // ===== SUPABASE CONFIG =====
+            const SUPABASE_URL = 'https://fvzzkfbpjcdsefpmyvvu.supabase.co';
+            const SUPABASE_KEY = 'sb_publishable_L8mIBUGG6AjLnbhCCMP3Ww_JN9-k6fM';
+            const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+            // ===== LOAD PRODUCTS FROM SUPABASE =====
+            async function loadProducts() {
+                const grid = document.getElementById('products-grid');
+                const countEl = document.getElementById('product-count');
+
+                grid.innerHTML = '<div class="col-span-3 text-center py-16"><span class="material-symbols-outlined text-[48px] text-primary animate-spin">progress_activity</span><p class="font-body-md text-on-surface-variant mt-4">Loading products...</p></div>';
+
+                try {
+                    const { data: products, error } = await sbClient
+                        .from('products')
+                        .select('*')
+                        .eq('in_stock', true)
+                        .order('id', { ascending: true });
+
+                    if (error) throw error;
+
+                    countEl.textContent = `Showing ${products.length} results`;
+
+                    if (products.length === 0) {
+                        grid.innerHTML = '<div class="col-span-3 text-center py-16"><p class="font-body-md text-on-surface-variant">No products available right now.</p></div>';
+                        return;
+                    }
+
+                    grid.innerHTML = products.map(p => `
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-ambient group hover:-translate-y-1 transition-transform duration-300">
+        <div class="relative h-64 overflow-hidden cursor-pointer" onclick="showProductDetail(${p.id})">
+          <img alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${p.image_url}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Coming+Soon'"/>
+          <span class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-3 py-1 rounded-full uppercase">${p.occasion || p.category}</span>
+        </div>
+        <div class="p-4 flex flex-col gap-2">
+          <h3 class="font-headline-md text-headline-md text-on-surface cursor-pointer" onclick="showProductDetail(${p.id})">${p.name}</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">${p.description}</p>
+          <p class="font-body-lg text-body-lg text-primary font-medium mt-2">${p.price === 0 ? 'Price on Request' : '₹' + Number(p.price).toLocaleString('en-IN')}</p>
+          <div class="flex gap-2 mt-4">
+            ${p.price === 0
+                            ? `<button onclick="showPage('custom')" class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Enquire Now</button>`
+                            : `<button onclick="addToCart('${p.name.replace(/'/g, "\'")}', ${p.price}, '${p.image_url}')" class="flex-1 bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded-lg hover:opacity-90 transition-colors">Add to Cart</button>`
+                        }
+            <button onclick="showPage('custom')" class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-caps text-label-caps py-2 rounded-lg hover:bg-primary/5 transition-colors">Customise</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+                } catch (err) {
+                    console.error('Error loading products:', err);
+                    grid.innerHTML = '<div class="col-span-3 text-center py-16"><p class="font-body-md text-error">Failed to load products. Please refresh.</p></div>';
+                    countEl.textContent = '';
+                }
+            }
+
+            // ===== SHOW PRODUCT DETAIL =====
+            async function showProductDetail(id) {
+                showPage('product');
+                try {
+                    const { data: p, error } = await sbClient
+                        .from('products')
+                        .select('*')
+                        .eq('id', id)
+                        .single();
+                    if (error) throw error;
+                    document.querySelector('#page-product img').src = p.image_url;
+                    document.querySelector('#page-product h1').textContent = p.name;
+                    document.querySelector('#page-product .text-primary.mb-4').textContent = p.price === 0 ? 'Price on Request' : '₹ ' + Number(p.price).toLocaleString('en-IN');
+                    document.querySelector('#page-product p.text-on-surface-variant').textContent = p.description;
+                    const addBtn = document.querySelector('#page-product button.bg-primary');
+                    if (p.price > 0) {
+                        addBtn.onclick = () => { addToCart(p.name, p.price, p.image_url); showPage('cart'); };
+                    } else {
+                        addBtn.textContent = 'Enquire Now';
+                        addBtn.onclick = () => showPage('custom');
+                    }
+                } catch (err) {
+                    console.error('Product detail error:', err);
+                }
+            }
         </script>
 </body>
 
