@@ -107,10 +107,6 @@
             display: flex;
         }
 
-        .page-hidden {
-            display: none !important;
-        }
-
         .nav-link.active {
             color: #864f50;
             border-bottom: 2px solid #864f50;
@@ -175,7 +171,7 @@
     </div>
 
     <!-- ===================== HOME PAGE ===================== -->
-    <div id="page-home" class="page">
+    <div id="page-home">
         <main class="min-h-screen pb-[100px] md:pb-0">
             <!-- Hero -->
             <section class="relative w-full h-[600px] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -320,7 +316,7 @@
     </div>
 
     <!-- ===================== SHOP PAGE ===================== -->
-    <div id="page-shop" class="page">
+    <div id="page-shop">
         <main
             class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col md:flex-row gap-gutter pb-24 md:pb-12">
             <!-- Sidebar Filter -->
@@ -362,8 +358,7 @@
                             Price Range</h3>
                         <input class="w-full" max="10000" min="0" type="range" style="accent-color:#864f50;">
                         <div class="flex justify-between mt-2 font-body-sm text-body-sm text-on-surface-variant">
-                            <span>₹0</span><span>₹10,000+</span>
-                        </div>
+                            <span>₹0</span><span>₹10,000+</span></div>
                     </div>
                 </div>
             </aside>
@@ -380,7 +375,7 @@
             </div>
         </main>
         <!-- ===================== PRODUCT DETAIL PAGE ===================== -->
-        <div id="page-product" class="page">
+        <div id="page-product">
             <main
                 class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20 space-y-24 pb-24 md:pb-20">
                 <div class="mb-4">
@@ -488,7 +483,7 @@
         </div>
 
         <!-- ===================== CART PAGE ===================== -->
-        <div id="page-cart" class="page">
+        <div id="page-cart">
             <main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 pb-32 md:pb-12">
                 <h1 class="font-headline-lg text-headline-lg text-primary mb-8">Your Cart</h1>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -541,7 +536,7 @@
         </div>
 
         <!-- ===================== CUSTOM ORDER PAGE ===================== -->
-        <div id="page-custom" class="page">
+        <div id="page-custom">
             <main
                 class="flex-grow flex flex-col items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-12 md:py-24 pb-32 md:pb-24">
                 <div class="text-center mb-16 md:mb-24 max-w-2xl">
@@ -638,7 +633,7 @@
         </div>
 
         <!-- ===================== ABOUT PAGE ===================== -->
-        <div id="page-about" class="page">
+        <div id="page-about">
             <main class="w-full pb-32 md:pb-16">
                 <section
                     class="relative w-full min-h-[500px] flex items-center justify-center bg-surface-container-low overflow-hidden">
@@ -706,8 +701,7 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">volunteer_activism</span>
-                                </div>
+                                    <span class="material-symbols-outlined">volunteer_activism</span></div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Handcrafted Quality
                                 </h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">Each hamper is meticulously
@@ -718,8 +712,7 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">local_shipping</span>
-                                </div>
+                                    <span class="material-symbols-outlined">local_shipping</span></div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">PAN India Reach</h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">Distance shouldn't dim a
                                     celebration. We ensure safe, secure, and beautiful deliveries to loved ones across
@@ -729,8 +722,7 @@
                                 class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/30 shadow-ambient flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
                                 <div
                                     class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-6">
-                                    <span class="material-symbols-outlined">diamond</span>
-                                </div>
+                                    <span class="material-symbols-outlined">diamond</span></div>
                                 <h3 class="font-headline-md text-headline-md text-on-surface mb-3">Curated Luxury</h3>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant">We source only premium,
                                     mostly artisanal products. From gourmet treats to bespoke ceramics, every item is
@@ -743,7 +735,7 @@
         </div>
 
         <!-- ===================== CONTACT PAGE ===================== -->
-        <div id="page-contact" class="page">
+        <div id="page-contact">
             <main
                 class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[80px] md:py-[120px] pb-32 md:pb-24">
                 <div class="text-center mb-[80px] max-w-2xl mx-auto">
@@ -761,8 +753,7 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">mail</span>
-                                </div>
+                                    <span class="material-symbols-outlined">mail</span></div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Email Us</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">For detailed
@@ -780,8 +771,7 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">forum</span>
-                                </div>
+                                    <span class="material-symbols-outlined">forum</span></div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">WhatsApp</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">Quick responses
@@ -800,8 +790,7 @@
                             <div class="relative z-10 flex items-start gap-4">
                                 <div
                                     class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0">
-                                    <span class="material-symbols-outlined">photo_camera</span>
-                                </div>
+                                    <span class="material-symbols-outlined">photo_camera</span></div>
                                 <div>
                                     <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Instagram</h3>
                                     <p class="font-body-md text-body-md text-on-surface-variant mb-2">Slide into our DMs
@@ -1027,14 +1016,14 @@
             }
 
             // ===== NAVIGATION =====
+            const ALL_PAGES = ['home', 'shop', 'product', 'cart', 'custom', 'about', 'contact'];
             function showPage(page) {
-                // Hide all pages using inline style
-                document.querySelectorAll('.page').forEach(p => {
-                    p.style.setProperty('display', 'none', 'important');
+                ALL_PAGES.forEach(p => {
+                    const el = document.getElementById('page-' + p);
+                    if (el) el.style.display = 'none';
                 });
-                // Show selected page
-                document.getElementById('page-' + page).style.removeProperty('display');
-                document.getElementById('page-' + page).style.setProperty('display', 'block', 'important');
+                const target = document.getElementById('page-' + page);
+                if (target) target.style.display = 'block';
 
                 // Update desktop nav
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
