@@ -132,6 +132,7 @@
             box-shadow: 0 4px 20px rgba(192, 128, 129, 0.08);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
@@ -1055,12 +1056,6 @@
                 window.scrollTo(0, 0);
             }
 
-            // Init
-            showPage('home');
-        </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-        <script>
             // ===== SUPABASE CONFIG =====
             const SUPABASE_URL = 'https://fvzzkfbpjcdsefpmyvvu.supabase.co';
             const SUPABASE_KEY = 'sb_publishable_L8mIBUGG6AjLnbhCCMP3Ww_JN9-k6fM';
@@ -1142,7 +1137,11 @@
                     console.error('Product detail error:', err);
                 }
             }
+
+            // Init
+            showPage('home');
         </script>
+
 </body>
 
 </html>
