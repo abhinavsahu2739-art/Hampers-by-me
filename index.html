@@ -2149,6 +2149,7 @@
             }
         }
     </style>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
@@ -2298,23 +2299,44 @@
                 <div class="filter-group">
                     <span class="filter-label">Category</span>
                     <div class="filter-options">
-                        <label><input type="checkbox" checked> Hampers</label>
-                        <label><input type="checkbox"> Bangles</label>
+                        <label><input type="checkbox" onchange="applyFilters()">Bouquet</label>
+                        <label><input type="checkbox" onchange="applyFilters()">Mini Hampers</label>
+                        <label><input type="checkbox" onchange="applyFilters()"> Bangles</label>
+                        <label><input type="checkbox" onchange="applyFilters()">Custom</label>
                     </div>
                 </div>
                 <div class="filter-group">
                     <span class="filter-label">Occasion</span>
                     <div class="filter-options">
-                        <label><input type="checkbox"> Birthday</label>
-                        <label><input type="checkbox" checked> Wedding</label>
-                        <label><input type="checkbox"> Diwali</label>
+                        <label><input type="checkbox" onchange="applyFilters()"> Birthday</label>
+                        <label><input type="checkbox" onchange="applyFilters()"> Wedding</label>
+                        <label><input type="checkbox" onchange="applyFilters()"> Festival</label>
+                        <label><input type="checkbox" onchange="applyFilters()"> All Occasions</label>
                     </div>
                 </div>
                 <div class="filter-group">
                     <span class="filter-label">Price Range</span>
-                    <input type="range" class="price-range" min="0" max="10000">
-                    <div class="price-range-labels"><span>₹0</span><span>₹10,000+</span></div>
+                    <input type="range" class="price-range" min="0" max="10000" value="10000"
+                        oninput="updatePriceLabel(this); applyFilters()">
+                    <div class="price-range-labels">
+                        <span>₹0</span>
+                        <span id="Price-max-label">₹10,000+</span>
+                    </div>
                 </div>
+                <button onclick="resetFilters()" style="width:100%;
+                margin-top:8px;
+    padding:10px;
+    border:1px solid var(--outline-variant);
+    border-radius:10px;
+    background:none;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    letter-spacing:0.05em;
+              ">Reset Filters
+                </button>
+
             </aside>
             <div class="shop-products">
                 <div class="shop-header">
@@ -2429,7 +2451,7 @@
                         <div class="summary-total"><span>Total</span><span id="cart-total"
                                 class="total-amount">₹0</span></div>
                         <div style="margin-top:24px;">
-                            <button class="btn-checkout">Proceed to Checkout</button>
+                            <button class="btn-checkout" onclick="initiatePayment()">Proceed to Checkout</button>
                             <button class="btn-continue-shopping" onclick="showPage('shop')">Continue Shopping</button>
                         </div>
                         <div class="secure-badge">
@@ -2815,38 +2837,101 @@
             const grid = document.getElementById('products-grid');
             const countEl = document.getElementById('product-count');
             grid.innerHTML = '<div class="loading-spinner"><span class="material-symbols-outlined">progress_activity</span><p style="font-size:16px;color:var(--on-surface-variant);margin-top:16px;">Loading products...</p></div>';
+
             try {
-                const { data: products, error } = await sbClient.from('products').select('*').eq('in_stock', true).order('id', { ascending: true });
+                const { data: products, error } = await sbClient
+                    .from('products')
+                    .select('*')
+                    .eq('in_stock', true)
+                    .order('id', { ascending: true });
+
                 if (error) throw error;
-                countEl.textContent = `Showing ${products.length} results`;
-                if (products.length === 0) {
-                    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--on-surface-variant);">No products available right now.</div>';
-                    return;
-                }
-                grid.innerHTML = products.map(p => `
-      <div class="product-card">
-        <div class="product-card-img" onclick="showProductDetail(${p.id})">
-          <img alt="${p.name}" src="${p.image_url}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Coming+Soon'"/>
-          <span class="product-badge">${p.occasion || p.category}</span>
-        </div>
-        <div class="product-card-body">
-          <h3 onclick="showProductDetail(${p.id})">${p.name}</h3>
-          <p class="desc">${p.description}</p>
-          <p class="price">${p.price === 0 ? 'Price on Request' : '₹' + Number(p.price).toLocaleString('en-IN')}</p>
-          <div class="product-card-actions">
-            ${p.price === 0
-                        ? `<button class="btn-card-primary" onclick="showPage('custom')">Enquire Now</button>`
-                        : `<button class="btn-card-primary" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image_url}')">Add to Cart</button>`
-                    }
-            <button class="btn-card-outline" onclick="showPage('custom')">Customise</button>
-          </div>
-        </div>
-      </div>`).join('');
+
+                window.allProducts = products;
+                applyFilters();
+
             } catch (err) {
                 console.error(err);
                 grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--error);">Failed to load products. Please refresh.</div>';
-                countEl.textContent = '';
+                document.getElementById('product-count').textContent = '';
             }
+        }
+
+        function applyFilters() {
+            const grid = document.getElementById('products-grid');
+            const countEl = document.getElementById('product-count');
+
+            if (!window.allProducts) return;
+
+            const selectedCategories = Array.from(
+                document.querySelectorAll('.filter-group:nth-child(1) input[type="checkbox"]:checked')
+            ).map(cb => cb.nextSibling.textContent.trim().toLowerCase());
+
+            const selectedOccasions = Array.from(
+                document.querySelectorAll('.filter-group:nth-child(2) input[type="checkbox"]:checked')
+            ).map(cb => cb.nextSibling.textContent.trim().toLowerCase());
+
+            const priceRange = document.querySelector('.price-range');
+            const maxPrice = parseInt(priceRange.value);
+
+            let filtered = window.allProducts.filter(p => {
+                const categoryMatch = selectedCategories.length === 0 ||
+                    selectedCategories.some(c => p.category?.toLowerCase() === c);
+
+                const occasionMatch = selectedOccasions.length === 0 ||
+                    selectedOccasions.some(o => p.occasion?.toLowerCase() === o) ||
+                    p.occasion?.toLowerCase() === 'all occasions';
+
+                const priceMatch = priceRange.value == priceRange.max ||
+                    p.price === 0 ||
+                    p.price <= maxPrice;
+
+                return categoryMatch && occasionMatch && priceMatch;
+            });
+
+            countEl.textContent = `Showing ${filtered.length} results`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--on-surface-variant);">No products match your filters.</div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-card-img" onclick="showProductDetail(${p.id})">
+        <img alt="${p.name}" src="${p.image_url}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Coming+Soon'"/>
+        <span class="product-badge">${p.occasion || p.category}</span>
+      </div>
+      <div class="product-card-body">
+        <h3 onclick="showProductDetail(${p.id})">${p.name}</h3>
+        <p class="desc">${p.description}</p>
+        <p class="price">${p.price === 0 ? 'Price on Request' : '₹' + Number(p.price).toLocaleString('en-IN')}</p>
+        <div class="product-card-actions">
+          ${p.price === 0
+                    ? `<button class="btn-card-primary" onclick="showPage('custom')">Enquire Now</button>`
+                    : `<button class="btn-card-primary" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image_url}')">Add to Cart</button>`
+                }
+          <button class="btn-card-outline" onclick="showPage('custom')">Customise</button>
+        </div>
+      </div>
+    </div>`).join('');
+        }
+
+        function updatePriceLabel(slider) {
+            const label = document.getElementById('price-max-label');
+            label.textContent = parseInt(slider.value) == parseInt(slider.max)
+                ? '₹10,000+'
+                : '₹' + parseInt(slider.value).toLocaleString('en-IN');
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            const slider = document.querySelector('.price-range');
+            slider.value = slider.max;
+            updatePriceLabel(slider);
+            applyFilters();
         }
 
         async function showProductDetail(id) {
@@ -2869,9 +2954,110 @@
             } catch (err) { console.error(err); }
         }
 
+        // ===== RAZORPAY PAYMENT =====
+        async function initiatePayment() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+
+            const totalAmount = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+            // Show loading state on button
+            const btn = document.querySelector(".btn-checkout");
+            btn.textContent = "Processing...";
+            btn.disabled = true;
+
+            try {
+                // Step 1: Create order on your backend
+                const orderRes = await fetch("/api/create-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        amount: totalAmount,
+                        cartItems: cart,
+                        customerName: "",
+                        customerEmail: "",
+                        customerPhone: "",
+                    }),
+                });
+
+                if (!orderRes.ok) throw new Error("Failed to create order");
+                const { orderId, amount } = await orderRes.json();
+
+                // Step 2: Open Razorpay checkout modal
+                const options = {
+                    key: "YOUR_RAZORPAY_KEY_ID", // ← paste your public key here (rzp_test_xxx)
+                    amount: amount,
+                    currency: "INR",
+                    name: "Hampers By Me",
+                    description: "Curated Gifting with Love",
+                    image: "", // optional: your logo URL
+                    order_id: orderId,
+
+                    handler: async function (response) {
+                        // Step 3: Verify payment on your backend
+                        const verifyRes = await fetch("/api/verify-payment", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                cartItems: cart,
+                                totalAmount: totalAmount,
+                                customerName: "",
+                                customerEmail: "",
+                                customerPhone: "",
+                            }),
+                        });
+
+                        const result = await verifyRes.json();
+
+                        if (result.success) {
+                            // Clear cart
+                            cart = [];
+                            updateCartUI();
+                            renderCartPage();
+                            showToast("🎉 Payment successful! We'll process your order shortly.");
+                            showPage("home");
+                        } else {
+                            showToast("Payment verification failed. Please contact support.");
+                        }
+                    },
+
+                    modal: {
+                        ondismiss: function () {
+                            btn.textContent = "Proceed to Checkout";
+                            btn.disabled = false;
+                        },
+                    },
+
+                    theme: {
+                        color: "#864f50", // your brand color
+                    },
+                };
+
+                const rzp = new window.Razorpay(options);
+                rzp.on("payment.failed", function (response) {
+                    showToast("Payment failed: " + response.error.description);
+                    btn.textContent = "Proceed to Checkout";
+                    btn.disabled = false;
+                });
+                rzp.open();
+
+            } catch (err) {
+                console.error(err);
+                showToast("Something went wrong. Please try again.");
+                btn.textContent = "Proceed to Checkout";
+                btn.disabled = false;
+            }
+        }
+
         // Init
         showPage('home');
     </script>
+
 </body>
 
 </html>
