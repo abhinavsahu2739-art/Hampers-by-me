@@ -2485,20 +2485,22 @@
                 <h2>Filters</h2>
                 <div class="filter-group">
                     <span class="filter-label">Category</span>
-                    <div class="filter-options">
-                        <label><input type="checkbox" onchange="applyFilters()">Bouquet</label>
-                        <label><input type="checkbox" onchange="applyFilters()">Mini Hampers</label>
-                        <label><input type="checkbox" onchange="applyFilters()"> Bangles</label>
-                        <label><input type="checkbox" onchange="applyFilters()">Custom</label>
+                    <div class="filter-options" data-filter="category">
+                        <label><input type="checkbox" value="bouquet" onchange="applyFilters()"> Bouquet</label>
+                        <label><input type="checkbox" value="mini hampers" onchange="applyFilters()"> Mini
+                            Hampers</label>
+                        <label><input type="checkbox" value="bangles" onchange="applyFilters()"> Bangles</label>
+                        <label><input type="checkbox" value="custom" onchange="applyFilters()"> Custom</label>
                     </div>
                 </div>
                 <div class="filter-group">
                     <span class="filter-label">Occasion</span>
-                    <div class="filter-options">
-                        <label><input type="checkbox" onchange="applyFilters()"> Birthday</label>
-                        <label><input type="checkbox" onchange="applyFilters()"> Wedding</label>
-                        <label><input type="checkbox" onchange="applyFilters()"> Festival</label>
-                        <label><input type="checkbox" onchange="applyFilters()"> All Occasions</label>
+                    <div class="filter-options" data-filter="occasion">
+                        <label><input type="checkbox" value="birthday" onchange="applyFilters()"> Birthday</label>
+                        <label><input type="checkbox" value="wedding" onchange="applyFilters()"> Wedding</label>
+                        <label><input type="checkbox" value="festival" onchange="applyFilters()"> Festival</label>
+                        <label><input type="checkbox" value="all occasions" onchange="applyFilters()"> All
+                            Occasions</label>
                     </div>
                 </div>
                 <div class="filter-group">
@@ -2507,11 +2509,12 @@
                         oninput="updatePriceLabel(this); applyFilters()">
                     <div class="price-range-labels">
                         <span>₹0</span>
-                        <span id="Price-max-label">₹10,000+</span>
+                        <span id="price-max-label">₹10,000+</span>
                     </div>
                 </div>
-                <button onclick="resetFilters()" style="width:100%;
-                margin-top:8px;
+                <button onclick="resetFilters()" style="
+    width:100%;
+    margin-top:8px;
     padding:10px;
     border:1px solid var(--outline-variant);
     border-radius:10px;
@@ -2521,9 +2524,7 @@
     font-weight:600;
     cursor:pointer;
     letter-spacing:0.05em;
-              ">Reset Filters
-                </button>
-
+  ">Reset Filters</button>
             </aside>
             <div class="shop-products">
                 <div class="shop-header">
@@ -3094,26 +3095,34 @@
 
             if (!window.allProducts) return;
 
+            // Read checked category values directly
             const selectedCategories = Array.from(
-                document.querySelectorAll('.filter-group:nth-child(1) input[type="checkbox"]:checked')
-            ).map(cb => cb.parentElement.textContent.trim().toLowerCase());
+                document.querySelectorAll('[data-filter="category"] input:checked')
+            ).map(cb => cb.value.toLowerCase());
 
+            // Read checked occasion values directly
             const selectedOccasions = Array.from(
-                document.querySelectorAll('.filter-group:nth-child(2) input[type="checkbox"]:checked')
-            ).map(cb => cb.parentElement.textContent.trim().toLowerCase());
+                document.querySelectorAll('[data-filter="occasion"] input:checked')
+            ).map(cb => cb.value.toLowerCase());
 
+            // Read price range
             const priceRange = document.querySelector('.price-range');
             const maxPrice = parseInt(priceRange.value);
+            const isMaxPrice = parseInt(priceRange.value) === parseInt(priceRange.max);
 
+            // Filter products
             let filtered = window.allProducts.filter(p => {
+                const productCategory = (p.category || '').toLowerCase().trim();
+                const productOccasion = (p.occasion || '').toLowerCase().trim();
+
                 const categoryMatch = selectedCategories.length === 0 ||
-                    selectedCategories.some(c => p.category?.toLowerCase() === c);
+                    selectedCategories.some(c => productCategory === c);
 
                 const occasionMatch = selectedOccasions.length === 0 ||
-                    selectedOccasions.some(o => p.occasion?.toLowerCase() === o) ||
-                    p.occasion?.toLowerCase() === 'all occasions';
+                    productOccasion === 'all occasions' ||
+                    selectedOccasions.some(o => productOccasion === o);
 
-                const priceMatch = priceRange.value == priceRange.max ||
+                const priceMatch = isMaxPrice ||
                     p.price === 0 ||
                     p.price <= maxPrice;
 
