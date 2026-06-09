@@ -2865,11 +2865,11 @@
 
             const selectedCategories = Array.from(
                 document.querySelectorAll('.filter-group:nth-child(1) input[type="checkbox"]:checked')
-            ).map(cb => cb.nextSibling.textContent.trim().toLowerCase());
+            ).map(cb => cb.parentElement.textContent.trim().toLowerCase());
 
             const selectedOccasions = Array.from(
                 document.querySelectorAll('.filter-group:nth-child(2) input[type="checkbox"]:checked')
-            ).map(cb => cb.nextSibling.textContent.trim().toLowerCase());
+            ).map(cb => cb.parentElement.textContent.trim().toLowerCase());
 
             const priceRange = document.querySelector('.price-range');
             const maxPrice = parseInt(priceRange.value);
